@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 // Replace with your actual API URL
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl = 'https://movie-api-bqfe.onrender.com';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class UserRegistrationService {
 
   // User Registration
   public userRegistration(userDetails: any): Observable<any> {
-    return this.http.post(`${apiUrl}users`, userDetails).pipe(
+    return this.http.post(apiUrl + '/users', userDetails).pipe(  
       catchError(this.handleError)
     );
   }
