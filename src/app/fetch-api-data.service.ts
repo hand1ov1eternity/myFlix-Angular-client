@@ -14,6 +14,7 @@ export class UserRegistrationService {
 
   // User Registration
   public userRegistration(userDetails: any): Observable<any> {
+    console.log('Sending user details:', userDetails);
     return this.http.post(apiUrl + '/users', userDetails).pipe(  
       catchError(this.handleError)
     );
@@ -21,7 +22,8 @@ export class UserRegistrationService {
 
   // User Login
   public userLogin(userDetails: any): Observable<any> {
-    return this.http.post(`${apiUrl}login`, userDetails).pipe(
+    console.log('Sending login details:', userDetails);
+    return this.http.post(`${apiUrl}/login`, userDetails).pipe(
       catchError(this.handleError)
     );
   }

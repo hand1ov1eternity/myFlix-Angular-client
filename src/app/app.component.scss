@@ -1,0 +1,12 @@
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; // Full viewport height
+    text-align: center;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px; // Adjusts space between buttons
+  }

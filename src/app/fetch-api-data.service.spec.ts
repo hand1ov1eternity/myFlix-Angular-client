@@ -1,16 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FetchApiDataService } from './fetch-api-data.service';
+import { UserRegistrationService } from './fetch-api-data.service'; // Update the import
 
-describe('FetchApiDataService', () => {
-  let service: FetchApiDataService;
+describe('UserRegistrationService', () => { // Update the describe block
+  let service: UserRegistrationService; // Update the service variable
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FetchApiDataService);
+    service = TestBed.inject(UserRegistrationService); // Update service injection
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });
+
