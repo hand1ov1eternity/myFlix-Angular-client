@@ -30,7 +30,7 @@ export class UserRegistrationService {
 
   // Get all movies
   public getAllMovies(): Observable<any> {
-    return this.http.get(`${apiUrl}movies`, this.getHeaders()).pipe(
+    return this.http.get(`${apiUrl}/movies`, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -38,7 +38,7 @@ export class UserRegistrationService {
 
   // Get one movie by title
   public getOneMovie(title: string): Observable<any> {
-    return this.http.get(`${apiUrl}movies/${title}`, this.getHeaders()).pipe(
+    return this.http.get(`${apiUrl}/movies/${title}`, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -46,7 +46,7 @@ export class UserRegistrationService {
 
   // Get director by name
   public getDirector(name: string): Observable<any> {
-    return this.http.get(`${apiUrl}directors/${name}`, this.getHeaders()).pipe(
+    return this.http.get(`${apiUrl}/directors/${name}`, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -54,15 +54,7 @@ export class UserRegistrationService {
 
   // Get genre by name
   public getGenre(name: string): Observable<any> {
-    return this.http.get(`${apiUrl}genres/${name}`, this.getHeaders()).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-
-  // Get user by username
-  public getUser(username: string): Observable<any> {
-    return this.http.get(`${apiUrl}users/${username}`, this.getHeaders()).pipe(
+    return this.http.get(`${apiUrl}/genres/${name}`, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -70,7 +62,7 @@ export class UserRegistrationService {
 
   // Get favorite movies of a user
   public getFavoriteMovies(username: string): Observable<any> {
-    return this.http.get(`${apiUrl}users/${username}/movies`, this.getHeaders()).pipe(
+    return this.http.get(`${apiUrl}/users/${username}/movies`, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -78,15 +70,23 @@ export class UserRegistrationService {
 
   // Add a movie to favorite movies
   public addFavoriteMovie(username: string, movieId: string): Observable<any> {
-    return this.http.post(`${apiUrl}users/${username}/movies/${movieId}`, {}, this.getHeaders()).pipe(
+    return this.http.post(`${apiUrl}/users/${username}/movies/${movieId}`, {}, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
 
+    // Get user by username
+    public getUser(username: string): Observable<any> {
+      return this.http.get(`${apiUrl}/users/${username}`, this.getHeaders()).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+    }
+
   // Edit user details
   public editUser(username: string, updatedUser: any): Observable<any> {
-    return this.http.put(`${apiUrl}users/${username}`, updatedUser, this.getHeaders()).pipe(
+    return this.http.put(`${apiUrl}/users/${username}`, updatedUser, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -94,14 +94,14 @@ export class UserRegistrationService {
 
   // Delete user
   public deleteUser(username: string): Observable<any> {
-    return this.http.delete(`${apiUrl}users/${username}`, this.getHeaders()).pipe(
+    return this.http.delete(`${apiUrl}/users/${username}`, this.getHeaders()).pipe(
       catchError(this.handleError)
     );
   }
 
   // Remove a movie from favorite movies
   public removeFavoriteMovie(username: string, movieId: string): Observable<any> {
-    return this.http.delete(`${apiUrl}users/${username}/movies/${movieId}`, this.getHeaders()).pipe(
+    return this.http.delete(`${apiUrl}/users/${username}/movies/${movieId}`, this.getHeaders()).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
