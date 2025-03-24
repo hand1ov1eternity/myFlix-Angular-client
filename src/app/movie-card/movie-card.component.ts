@@ -78,7 +78,7 @@ export class MovieCardComponent implements OnInit {
     showGenre(movie: any): void {
         this.dialog.open(MessageBoxComponent, {
             data: {
-                title: String(movie.genre.type).toUpperCase(),
+                title: String(movie.genre.name).toUpperCase(),
                 content: movie.genre.description
             },
             width: "400px"
@@ -89,7 +89,7 @@ export class MovieCardComponent implements OnInit {
         this.dialog.open(MessageBoxComponent, {
             data: {
                 title: movie.director.name,
-                content: movie.genre.description
+                content: movie.director.bio
             },
             width: "400px"
         })
