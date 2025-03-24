@@ -25,15 +25,25 @@ export class MovieCardComponent implements OnInit {
     getMovies(): void {
         this.fetchApiData.getAllMovies().subscribe(res => {
             this.movies = res;
-
-            let user = JSON.parse(localStorage.getItem("user") || "");
-            this.movies.forEach((movie: any) => {
-                movie.isFavorite = user.favoriteMovies.includes(movie._id);
-            })
+    
+            let user = localStorage.getItem('currentUser');
+if (user) {
+  try {
+    const parsedUser = JSON.parse(user);
+    // Ensure user has favoriteMovies property
+    if (parsedUser && Array.isArray(parsedUser.favoriteMovies)) {
+      console.log(parsedUser.favoriteMovies);
+    }
+  } catch (error) {
+    console.error('Error parsing user data:', error);
+  }
+} else {
+  console.log('User not found in localStorage');
+}
             return this.movies;
         }, err => {
-            console.error(err)
-        })
+            console.error(err);
+        });
     }
 
     logout(): void {
