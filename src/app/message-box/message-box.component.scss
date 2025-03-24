@@ -1,7 +1,43 @@
-.messageBoxTitle {
-    color: white;
-}
-
-.messageBoxContent {
-    color: yellow;
-}
+mat-card {
+    max-width: 400px;
+    margin: auto;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+  
+    mat-card-header {
+      background: linear-gradient(135deg, #673ab7, #512da8);
+      padding: 12px;
+      border-radius: 8px 8px 0 0;
+      color: white;
+      text-align: center;
+  
+      .messageBoxTitle {
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+  
+    .messageBoxContent {
+      padding: 16px;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+    }
+  
+    mat-card-actions {
+      display: flex;
+      justify-content: center;
+      padding: 12px;
+  
+      button {
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+  
