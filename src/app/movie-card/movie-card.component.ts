@@ -56,14 +56,21 @@ if (user) {
     }
 
     modifyFavoriteMovies(movie: any): void {
-        let user = JSON.parse(localStorage.getItem("currentUser") || "");
+        let storedUser = localStorage.getItem("currentUser");
+        let user = storedUser ? JSON.parse(storedUser) : { username: "", favoriteMovies: [] };
+    
+        if (!Array.isArray(user.favoriteMovies)) {
+            user.favoriteMovies = [];
+        }
+    
         let icon = document.getElementById(`${movie._id}-favorite-icon`);
-        console.log(user)
+        console.log(user);
+    
         if (user.favoriteMovies.includes(movie._id)) {
             this.fetchApiData.removeFavoriteMovie(user.username, movie._id).subscribe(res => {
                 icon?.setAttribute("fontIcon", "favorite_border");
                 console.log("Movie removed from favorites");
-                user.favoriteMovies = res.favoriteMovies;
+                user.favoriteMovies = res.favoriteMovies || [];
                 localStorage.setItem("currentUser", JSON.stringify(user));
             }, err => {
                 console.error(err);
@@ -72,13 +79,14 @@ if (user) {
             this.fetchApiData.addFavoriteMovie(user.username, movie._id).subscribe(res => {
                 icon?.setAttribute("fontIcon", "favorite");
                 console.log("Movie added to favorites");
-                user.favoriteMovies = res.favoriteMovies;
+                user.favoriteMovies = res.favoriteMovies || [];
                 localStorage.setItem("currentUser", JSON.stringify(user));
             }, err => {
                 console.error(err);
             });
         }
     }
+    
     
 
     showGenre(movie: any): void {
