@@ -1,72 +1,77 @@
 <mat-card>
   <button mat-raised-button color="primary" (click)="goBack()">Back</button>
 
-    <mat-card-header>
-      <mat-card-title>Profile</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form (ngSubmit)="updateProfile()">
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="user.username"
-            placeholder="Username"
-            type="text"
-            name="Username"
-            required
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="user.password"
-            type="password"
-            placeholder="New Password"
-            name="Password"
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="user.email"
-            type="email"
-            placeholder="Email"
-            name="Email"
-            required
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="user.birthday"
-            type="date"
-            placeholder="Birthday"
-            name="Birthday"
-          >
-        </mat-form-field>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button (click)="updateProfile()" color="primary">
-        Update Profile
-      </button>
-      <button mat-raised-button (click)="deleteAccount()" color="warn">
-        Delete Account
-      </button>
-    </mat-card-actions>
-  </mat-card>
-  
-  <mat-card>
-    <mat-card-content>
-        <h3>Favorite Movies</h3>
-        <div *ngFor="let movie of user.favoriteMovies">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{ movie.title }}</mat-card-title>
-                    <mat-card-subtitle>Directed by: {{ movie.director.name }}</mat-card-subtitle>
-                </mat-card-header>
-                <img src="{{ movie.imageURL }}" alt="{{ movie.title }}" />
-            </mat-card>
-        </div>
-    </mat-card-content>
+  <mat-card-header>
+    <mat-card-title>Profile</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="updateProfile()">
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="user.username"
+          placeholder="Username"
+          type="text"
+          name="Username"
+          required
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="user.password"
+          type="password"
+          placeholder="New Password"
+          name="Password"
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="user.email"
+          type="email"
+          placeholder="Email"
+          name="Email"
+          required
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="birthday"
+          type="date"
+          placeholder="Birthday"
+          name="Birthday"
+        >
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="updateProfile()" color="primary">
+      Update Profile
+    </button>
+    <button mat-raised-button (click)="deleteAccount()" color="warn">
+      Delete Account
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card>
+  <mat-card-content>
+    <h3>Favorite Movies</h3>
+    <div *ngIf="user.favoriteMovies?.length > 0; else noFavorites">
+      <div *ngFor="let movie of user.favoriteMovies">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ movie.title }}</mat-card-title>
+            <mat-card-subtitle>Directed by: {{ movie.director?.name }}</mat-card-subtitle>
+          </mat-card-header>
+          <img [src]="movie.imageURL" [alt]="movie.title" />
+        </mat-card>
+      </div>
+    </div>
+    <ng-template #noFavorites>
+      <p>No favorite movies added yet.</p>
+    </ng-template>
+  </mat-card-content>
 </mat-card>

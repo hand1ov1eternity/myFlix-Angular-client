@@ -10,11 +10,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  user: any = {
-    username: '',
-    email: '',
-    birthday: ''
-  };
+  user: any = {};
 
   constructor(
     private fetchApiData: UserRegistrationService,
@@ -36,19 +32,18 @@ export class UserProfileComponent implements OnInit {
     if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         this.fetchApiData.getUser(parsedUser.username).subscribe((response: any) => {
-            this.user = response;
-            if (!Array.isArray(this.user.favoriteMovies)) {
-                this.user.favoriteMovies = [];
-            }
+            this.user = response || {};
+            this.user.favoriteMovies = this.user.favoriteMovies || [];
+        }, error => {
+            console.error('Error fetching user profile', error);
         });
     }
 }
 
-
 updateProfile(): void {
-  this.fetchApiData.editUser(this.user.username, this.user).subscribe(
+  this.fetchApiData.editUser(this.user?.username, this.user).subscribe(
       (result) => {
-          result.favoriteMovies = this.user.favoriteMovies || [];
+          result.favoriteMovies = this.user?.favoriteMovies || [];
           localStorage.setItem('currentUser', JSON.stringify(result));
           this.snackBar.open('Profile updated successfully!', 'OK', {
               duration: 2000
@@ -62,10 +57,19 @@ updateProfile(): void {
   );
 }
 
+get birthday(): string {
+  return this.user?.birthday ? this.user.birthday.split('T')[0] : ''; // Format to 'yyyy-MM-dd'
+}
+
+set birthday(value: string) {
+  if (this.user) {
+    this.user.birthday = value; // Set the formatted value back to user.birthday
+  }
+}
 
   deleteAccount(): void {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      this.fetchApiData.deleteUser(this.user.username).subscribe(() => {
+      this.fetchApiData.deleteUser(this.user?.username).subscribe(() => {
         localStorage.clear();
         this.router.navigate(['welcome']);
         this.snackBar.open('Account deleted', 'OK', {
