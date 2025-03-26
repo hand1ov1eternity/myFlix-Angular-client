@@ -1,0 +1,11 @@
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  // Centers horizontally
+    justify-content: top; // Centers vertically
+    height: 100vh; // Takes full screen height
+    text-align: center;
+    gap: 20px
+
+}
+
