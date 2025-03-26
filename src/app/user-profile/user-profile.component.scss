@@ -1,9 +1,11 @@
 .profile-card {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-  }
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+
   
   .full-width {
     width: 100%;
@@ -15,6 +17,13 @@
     justify-content: space-between;
     margin-top: 20px;
   }
+
+  .back-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
   
   mat-card {
     margin-bottom: 16px;

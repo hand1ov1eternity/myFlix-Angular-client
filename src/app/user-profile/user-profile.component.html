@@ -1,8 +1,12 @@
 <mat-card>
-  <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+  <div class="back-button-container">
+    <button mat-icon-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
 
   <mat-card-header>
-    <mat-card-title>Profile</mat-card-title>
+    <mat-card-title><h3>Profile</h3></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form (ngSubmit)="updateProfile()">
