@@ -30,15 +30,22 @@ export class UserProfileComponent implements OnInit {
   getUserProfile(): void {
     const storedUser = localStorage.getItem("currentUser");
     if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        this.fetchApiData.getUser(parsedUser.username).subscribe((response: any) => {
-            this.user = response || {};
-            this.user.favoriteMovies = this.user.favoriteMovies || [];
-        }, error => {
-            console.error('Error fetching user profile', error);
+      const parsedUser = JSON.parse(storedUser);
+      this.fetchApiData.getUser(parsedUser.username).subscribe((response: any) => {
+        this.user = response || {};
+        this.user.favoriteMovies = this.user.favoriteMovies || [];
+        this.fetchApiData.getAllMovies().subscribe((allMovies: any) => {
+          // Filter favorite movies
+          this.user.favoriteMovies = allMovies.filter((movie: any) =>
+            this.user.favoriteMovies.includes(movie._id)
+          );
         });
+      }, error => {
+        console.error('Error fetching user profile', error);
+      });
     }
-}
+  }
+  
 
 updateProfile(): void {
   this.fetchApiData.editUser(this.user?.username, this.user).subscribe(
