@@ -16,3 +16,27 @@
     margin-top: 20px;
   }
   
+  mat-card {
+    margin-bottom: 16px;
+    padding: 16px;
+  }
+  
+  .favorite-movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: left; 
+  }
+  
+  .favorite-movie-card {
+    width: 200px; 
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .favorite-movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  

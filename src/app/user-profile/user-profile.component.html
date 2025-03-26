@@ -59,8 +59,8 @@
 <mat-card>
   <mat-card-content>
     <h3>Favorite Movies</h3>
-    <div *ngIf="user.favoriteMovies?.length > 0; else noFavorites">
-      <div *ngFor="let movie of user.favoriteMovies">
+    <div *ngIf="user.favoriteMovies?.length > 0; else noFavorites" class="favorite-movies-container">
+      <div *ngFor="let movie of user.favoriteMovies" class="favorite-movie-card">
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{ movie.title }}</mat-card-title>
