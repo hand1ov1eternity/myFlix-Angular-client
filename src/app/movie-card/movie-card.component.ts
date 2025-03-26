@@ -48,7 +48,7 @@ if (user) {
 
     logout(): void {
         this.router.navigate(["welcome"]);
-        localStorage.removeItem("user");
+        localStorage.removeItem("currentUser");
     }
 
     redirectProfile(): void {
@@ -56,34 +56,30 @@ if (user) {
     }
 
     modifyFavoriteMovies(movie: any): void {
-        let user = JSON.parse(localStorage.getItem("user") || "");
+        let user = JSON.parse(localStorage.getItem("currentUser") || "");
         let icon = document.getElementById(`${movie._id}-favorite-icon`);
-
+        console.log(user)
         if (user.favoriteMovies.includes(movie._id)) {
-            this.fetchApiData.removeFavoriteMovie(user.id, movie._id).subscribe(res => {  // Updated to use removeFavoriteMovie
+            this.fetchApiData.removeFavoriteMovie(user.username, movie._id).subscribe(res => {
                 icon?.setAttribute("fontIcon", "favorite_border");
-
-                console.log("del success");
-                console.log(res);
+                console.log("Movie removed from favorites");
                 user.favoriteMovies = res.favoriteMovies;
-                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("currentUser", JSON.stringify(user));
             }, err => {
                 console.error(err);
             });
         } else {
-            this.fetchApiData.addFavoriteMovie(user.id, movie._id).subscribe(res => {
+            this.fetchApiData.addFavoriteMovie(user.username, movie._id).subscribe(res => {
                 icon?.setAttribute("fontIcon", "favorite");
-
-                console.log("add success");
-                console.log(res);
+                console.log("Movie added to favorites");
                 user.favoriteMovies = res.favoriteMovies;
-                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("currentUser", JSON.stringify(user));
             }, err => {
                 console.error(err);
             });
         }
-        localStorage.setItem("user", JSON.stringify(user));
     }
+    
 
     showGenre(movie: any): void {
         this.dialog.open(MessageBoxComponent, {

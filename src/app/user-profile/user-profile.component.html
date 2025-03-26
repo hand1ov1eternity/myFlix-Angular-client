@@ -54,3 +54,20 @@
     </mat-card-actions>
   </mat-card>
   
+  <mat-card>
+    <mat-card-header>
+        <mat-card-title>Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <h3>Favorite Movies</h3>
+        <div *ngFor="let movie of user.favoriteMovies">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ movie.title }}</mat-card-title>
+                    <mat-card-subtitle>Directed by: {{ movie.director.name }}</mat-card-subtitle>
+                </mat-card-header>
+                <img src="{{ movie.imageURL }}" alt="{{ movie.title }}" />
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

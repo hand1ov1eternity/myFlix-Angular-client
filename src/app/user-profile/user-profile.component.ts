@@ -26,13 +26,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserProfile(): void {
-    const username = localStorage.getItem('currentUser');
+    const username = localStorage.getItem('currentUser') 
     if (username) {
-      this.fetchApiData.getUser(username).subscribe((response: any) => {
-        this.user = response;
-      });
+
+        this.fetchApiData.getUser(JSON.parse(username).username).subscribe((response: any) => {
+            this.user = response;
+        });
     }
-  }
+}
 
   updateProfile(): void {
     this.fetchApiData.editUser(this.user.username, this.user).subscribe(
