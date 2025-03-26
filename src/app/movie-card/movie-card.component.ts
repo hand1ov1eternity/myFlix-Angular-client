@@ -64,7 +64,6 @@ if (user) {
         }
     
         let icon = document.getElementById(`${movie._id}-favorite-icon`);
-        console.log(user);
     
         if (user.favoriteMovies.includes(movie._id)) {
             this.fetchApiData.removeFavoriteMovie(user.username, movie._id).subscribe(res => {
