@@ -1,26 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageBoxComponent } from '../message-box/message-box.component';
 
 @Component({
-    selector: 'app-movie-card',
-    templateUrl: './movie-card.component.html',
-    styleUrls: ['./movie-card.component.scss']
+  selector: 'app-movie-card',
+  templateUrl: './movie-card.component.html',
+  styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
-    movies: any[] = [];
+  movies: any[] = [];
+  gridCols: number = 4;
 
-    constructor(
-        public fetchApiData: UserRegistrationService,
-        public router: Router,
-        public dialog: MatDialog
-    ) { }
+  constructor(
+    public fetchApiData: UserRegistrationService,
+    public router: Router,
+    public dialog: MatDialog,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
-    ngOnInit(): void {
-        this.getMovies();
-    }
+  ngOnInit(): void {
+    this.getMovies();
+    this.setGridCols();
+  }
 
     getMovies(): void {
         this.fetchApiData.getAllMovies().subscribe(res => {
@@ -45,6 +49,22 @@ if (user) {
             console.error(err);
         });
     }
+
+    setGridCols(): void {
+        this.breakpointObserver.observe([
+          Breakpoints.Handset,
+          Breakpoints.Tablet,
+          Breakpoints.Web
+        ]).subscribe(result => {
+          if (result.breakpoints[Breakpoints.Handset]) {
+            this.gridCols = 1;
+          } else if (result.breakpoints[Breakpoints.Tablet]) {
+            this.gridCols = 2;
+          } else {
+            this.gridCols = 4;
+          }
+        });
+      }
 
     logout(): void {
         this.router.navigate(["welcome"]);
