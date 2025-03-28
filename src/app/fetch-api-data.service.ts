@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 
 // Replace with your actual API URL
 const apiUrl = 'https://movie-api-bqfe.onrender.com';
@@ -24,6 +24,12 @@ export class UserRegistrationService {
   public userLogin(userDetails: any): Observable<any> {
     console.log('Sending login details:', userDetails);
     return this.http.post(`${apiUrl}/login`, userDetails).pipe(
+      tap((response: any) => {
+        // Check if a token is returned and save it to localStorage
+        if (response && response.token) {
+          localStorage.setItem('token', response.token); // Save the token in localStorage
+        }
+      }),
       catchError(this.handleError)
     );
   }
@@ -86,7 +92,14 @@ export class UserRegistrationService {
 
   // Edit user details
   public editUser(username: string, updatedUser: any): Observable<any> {
-    return this.http.put(`${apiUrl}/users/${username}`, updatedUser, this.getHeaders()).pipe(
+    const token = localStorage.getItem('token');
+    console.log('Authorization Token:', token);  // Log the token to the console
+  
+    return this.http.put(`${apiUrl}/users/${username}`, updatedUser, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`  // Ensure the token is passed
+      })
+    }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );

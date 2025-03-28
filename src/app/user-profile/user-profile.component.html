@@ -48,12 +48,13 @@
           name="Birthday"
         >
       </mat-form-field>
+      
+      <!-- Button inside the form tag now -->
+      <button mat-raised-button type="submit" color="primary" style="margin-left: 16px;">Update Profile</button>
     </form>
   </mat-card-content>
+
   <mat-card-actions>
-    <button mat-raised-button (click)="updateProfile()" color="primary">
-      Update Profile
-    </button>
     <button mat-raised-button (click)="deleteAccount()" color="warn">
       Delete Account
     </button>
