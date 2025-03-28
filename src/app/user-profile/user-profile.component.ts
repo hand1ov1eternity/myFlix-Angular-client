@@ -77,16 +77,19 @@ set birthday(value: string) {
 deleteAccount(): void {
   if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
     this.fetchApiData.deleteUser(this.user?.username).subscribe(() => {
-      // Clear local storage to log out the user
+      // Clear all local storage items to log out the user completely
       localStorage.clear();
+      console.log('LocalStorage after clearing:', localStorage); // Verify if local storage is cleared
 
       // Show success message
       this.snackBar.open('Account deleted', 'OK', {
         duration: 2000
       });
 
-      // Redirect to the welcome page
-      this.router.navigate(['welcome-page']);  // 
+      // Redirect to the signup page (or welcome page)
+      this.router.navigate(['welcome']).then(() => {
+        console.log('Redirected to welcome page');
+      });
 
     }, error => {
       this.snackBar.open('Error deleting account', 'OK', {
