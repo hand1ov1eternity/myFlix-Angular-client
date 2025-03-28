@@ -1,53 +1,84 @@
 mat-card {
   padding: 16px; 
   margin: 8px; 
-    img {
-      width: 100%; // Adjust width to fit the card
-      height: auto; // Maintain aspect ratio
-      max-height: 300px; // Set a max height
-      object-fit: cover; // Crop image if necessary
-      border-radius: 8px; // Optional: adds rounded corners
-    }
+  border-radius: 8px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15); // Slightly stronger shadow for texture
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px); // Slight lift on hover
+    box-shadow: 4px 8px 15px rgba(0, 0, 0, 0.2);
   }
 
-  .movie-container {
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-  
-    mat-grid-list {
-      width: 100%;
-    }
-  
-    mat-card {
-      max-width: 300px;
-      border-radius: 8px;
-      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-  
-      img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 8px 8px 0 0;
+  img {
+    width: 100%; 
+    height: auto; 
+    max-height: 300px; 
+    object-fit: cover; 
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+.movie-container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 32px; // More space from the top
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+
+  mat-grid-list {
+    width: 100%;
+  }
+
+  mat-card {
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+
+    mat-card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+
+      mat-icon {
+        cursor: pointer;
+        transition: color 0.3s ease-in-out;
       }
-  
-      mat-card-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px;
-  
-        mat-icon {
-          cursor: pointer;
-          transition: color 0.3s;
-        }
-  
-        mat-icon:hover {
-          color: red;
-        }
+
+      mat-icon:hover {
+        color: red;
       }
     }
   }
-  
-  
+}
+
+/* Navbar (User Profile + Logout) */
+nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+
+  button {
+    background: linear-gradient(45deg, #ff6b6b, #f06595);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background: linear-gradient(45deg, #f06595, #d45087);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
