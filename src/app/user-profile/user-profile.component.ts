@@ -74,15 +74,27 @@ set birthday(value: string) {
   }
 }
 
-  deleteAccount(): void {
-    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      this.fetchApiData.deleteUser(this.user?.username).subscribe(() => {
-        localStorage.clear();
-        this.router.navigate(['welcome']);
-        this.snackBar.open('Account deleted', 'OK', {
-          duration: 2000
-        });
+deleteAccount(): void {
+  if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+    this.fetchApiData.deleteUser(this.user?.username).subscribe(() => {
+      // Clear local storage to log out the user
+      localStorage.clear();
+
+      // Show success message
+      this.snackBar.open('Account deleted', 'OK', {
+        duration: 2000
       });
-    }
+
+      // Redirect to the welcome page
+      this.router.navigate(['welcome-page']);  // 
+
+    }, error => {
+      this.snackBar.open('Error deleting account', 'OK', {
+        duration: 2000
+      });
+      console.error(error);
+    });
   }
+}
+
 }
