@@ -219,8 +219,13 @@ export class UserRegistrationService {
    * @returns A thrown error to propagate to the caller.
    */
   private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 200 && error.error && error.error.text) {
+      console.log('Received success response treated as error:', error.error.text);
+      return new Observable(); // ← empty observable, NO ERROR thrown
+    }
+  
     if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
+      console.error('An error occurred:', error.error.message);
     } else {
       console.error(
         `Error Status code ${error.status}, ` +
@@ -229,4 +234,5 @@ export class UserRegistrationService {
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
+  
 }

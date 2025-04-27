@@ -19,6 +19,9 @@ export class UserProfileComponent implements OnInit {
   /** The user object that holds the user's profile data */
   user: any = {};
 
+  /** Boolean to manage the delete loading state */
+  isDeleting: boolean = false;
+
   /**
    * Creates an instance of UserProfileComponent.
    * 
@@ -58,14 +61,14 @@ export class UserProfileComponent implements OnInit {
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       this.fetchApiData.getUser(parsedUser.username).subscribe((response: any) => {
+        console.log('User API response:', response); // keep for debugging
+  
+        // Set user directly
         this.user = response || {};
+  
+        // Make sure favoriteMovies array exists
         this.user.favoriteMovies = this.user.favoriteMovies || [];
-        this.fetchApiData.getAllMovies().subscribe((allMovies: any) => {
-          // Filter favorite movies
-          this.user.favoriteMovies = allMovies.filter((movie: any) =>
-            this.user.favoriteMovies.includes(movie._id)
-          );
-        });
+  
       }, error => {
         console.error('Error fetching user profile', error);
       });
@@ -121,27 +124,23 @@ export class UserProfileComponent implements OnInit {
    */
   deleteAccount(): void {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      this.fetchApiData.deleteUser(this.user?.username).subscribe(() => {
-        // Clear all local storage items to log out the user completely
-        localStorage.clear();
-        console.log('LocalStorage after clearing:', localStorage); // Verify if local storage is cleared
-
-        // Show success message
-        this.snackBar.open('Account deleted', 'OK', {
-          duration: 2000
-        });
-
-        // Redirect to the signup page (or welcome page)
-        this.router.navigate(['welcome']).then(() => {
-          console.log('Redirected to welcome page');
-        });
-
-      }, error => {
-        this.snackBar.open('Error deleting account', 'OK', {
-          duration: 2000
-        });
-        console.error(error);
+      this.isDeleting = true; // Start loading spinner or "Deleting..." state
+      this.fetchApiData.deleteUser(this.user?.username).subscribe({
+        next: () => {
+          localStorage.clear();
+          this.snackBar.open('Account deleted successfully!', 'OK', { duration: 2000 });
+          this.router.navigate(['/welcome']).then(() => {
+            console.log('Redirected to welcome page');
+            this.isDeleting = false;
+          });
+        },
+        error: (error) => {
+          console.error(error);
+          this.snackBar.open('Error deleting account', 'OK', { duration: 2000 });
+          this.isDeleting = false; // Stop loading even if error
+        }
       });
     }
   }
+  
 }

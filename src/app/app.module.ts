@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,7 +83,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,               // Material design form fields
     MatSnackBarModule,                // Material design snackbars
     MatIconModule,                    // Material design icons
-    MatGridListModule                 // Material design grid list
+    MatGridListModule,                // Material design grid list
+    MatProgressSpinnerModule
   ],
   /**
    * Providers for the app. You can add services here.
