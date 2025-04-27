@@ -33,7 +33,7 @@ myFlix is a movie discovery app built using Angular. It allows users to browse m
    ```
 3. Run the app locally:
    ```sh
-   npm start
+   ng serve
    ```
    The app will be available at `http://localhost:4200/`
 
