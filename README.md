@@ -64,3 +64,50 @@ ng serve
 Visit:
 
 http://localhost:4200/
+
+---
+
+##🧪 Usage
+Register or log in to access all features
+
+Browse and search movies from the catalog
+
+Click a movie to view its genre, director, and description
+
+Add/remove favorites
+
+Edit or delete your user profile
+
+###🔐 API & Authentication
+This app communicates with the myFlix API hosted on Render. All secure routes require JWT authentication:
+
+On login, a JWT token is stored in localStorage
+
+Token is used for all protected API requests
+
+###🚀 Deployment
+This app is deployed to GitHub Pages.
+
+To build and deploy:
+
+ng build --base-href "/myFlix-Angular-client/"
+npx angular-cli-ghpages --dir=dist/my-flix-angular-client
+
+###📖 Documentation
+Auto-generated TypeDoc documentation is available in the docs/ folder.
+
+###🤝 Contributing
+Contributions are welcome!
+To contribute:
+
+Fork the repository
+
+Create a new branch (feature/your-feature)
+
+Make and test your changes
+
+Submit a pull request
+
+---
+
+> Built with Angular, Material Design, and movie magic 🎬✨ — always a work in progress 🚧.
