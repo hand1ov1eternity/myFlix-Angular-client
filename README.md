@@ -67,7 +67,7 @@ http://localhost:4200/
 
 ---
 
-##🧪 Usage
+### 🧪 Usage
 Register or log in to access all features
 
 Browse and search movies from the catalog
@@ -78,14 +78,14 @@ Add/remove favorites
 
 Edit or delete your user profile
 
-###🔐 API & Authentication
+### 🔐 API & Authentication
 This app communicates with the myFlix API hosted on Render. All secure routes require JWT authentication:
 
 On login, a JWT token is stored in localStorage
 
 Token is used for all protected API requests
 
-###🚀 Deployment
+### 🚀 Deployment
 This app is deployed to GitHub Pages.
 
 To build and deploy:
@@ -93,10 +93,10 @@ To build and deploy:
 ng build --base-href "/myFlix-Angular-client/"
 npx angular-cli-ghpages --dir=dist/my-flix-angular-client
 
-###📖 Documentation
+### 📖 Documentation
 Auto-generated TypeDoc documentation is available in the docs/ folder.
 
-###🤝 Contributing
+### 🤝 Contributing
 Contributions are welcome!
 To contribute:
 
