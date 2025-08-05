@@ -1,66 +1,66 @@
-# myFlix Angular Client
+# 🎥 myFlix Angular Client
 
-## Overview
+🔗 **[Live Demo »](https://hand1ov1eternity.github.io/myFlix-Angular-client/)**
 
-myFlix is a movie discovery app built using Angular. It allows users to browse movies, view details about directors and genres, and manage their favorite movies.
+---
 
-## Features
+## 🎯 Features
 
-- User authentication (registration & login)
-- Browse movies with detailed information
-- View director and genre details
-- Add/remove movies from favorites
-- Update user profile
-- Fully responsive UI with Angular Material
+- 🔐 **User Authentication**
+  - Sign up and log in with secure JWT-based authentication.
 
-## Tech Stack
+- 🎞️ **Movie Browser**
+  - Browse a list of movies with full details including title, description, genre, and director.
 
-- **Frontend**: Angular 16, Angular Material
-- **Backend**: Node.js, Express.js, MongoDB (Hosted on Render)
-- **Deployment**: GitHub Pages
-- **API Communication**: Fetch API with authentication via JWT
+- 🧠 **Director & Genre Info**
+  - View detailed descriptions for directors and genres.
 
-## Installation
+- ⭐ **Favorite Movies**
+  - Add or remove movies from your favorites list.
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/Hand1ov1eternity/myFlix-Angular-client.git
-   cd myFlix-Angular-client
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Run the app locally:
-   ```sh
-   ng serve
-   ```
-   The app will be available at `http://localhost:4200/`
+- 👤 **Profile Management**
+  - Update your username, password, email, and birthday.
 
-## Usage
+- 📱 **Responsive Design**
+  - Built with Angular Material for a fully responsive user experience.
 
-- Register/Login to access features
-- Browse and search for movies
-- Click on a movie for details
-- Add/remove favorites
-- Update profile information
+---
 
-## API & Authentication
+## 🛠️ Tech Stack
 
-The app interacts with the myFlix API, which requires user authentication via JWT. Upon login, a token is stored in `localStorage` and used for API requests.
+Frontend: Angular 16, Angular Material
 
-## Deployment
+Backend: Node.js, Express.js, MongoDB (Hosted on Render)
 
-This app is deployed on GitHub Pages:
-[myFlix Angular Client](https://hand1ov1eternity.github.io/myFlix-Angular-client/)
+API Communication: Fetch API + JWT Authentication
 
-To build and deploy:
+Deployment: GitHub Pages
 
-```sh
-ng build --base-href "/myFlix-Angular-client/"
-npx angular-cli-ghpages --dir=dist/my-flix-angular-client
-```
+---
 
-## Documentation
+## ⚙️ Installation
 
-Auto-generated TypeDoc documentation is available in the `docs/` folder.
+### ✅ Prerequisites
+
+- Node.js & npm
+- Angular CLI installed globally (`npm install -g @angular/cli`)
+
+---
+
+### 📦 Setup
+
+Clone the repository:
+
+git clone https://github.com/Hand1ov1eternity/myFlix-Angular-client.git
+cd myFlix-Angular-client
+
+Install dependencies:
+
+npm install
+Run the app locally:
+
+ng serve
+
+Visit:
+
+http://localhost:4200/
